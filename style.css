@@ -1,0 +1,186 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: content-box;
+}
+
+body {
+  color: rgb(63, 63, 63);
+}
+
+header {
+  padding: 20px 0;
+  background: rgb(63, 63, 63);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+h1 {
+  font-size: 48px;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 5px;
+  padding-left: 25px;
+  font-size: 40px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
+p {
+  margin-top: 20px;
+  margin-bottom: 0px;
+  padding-left: 20px;
+  padding-bottom: 0px;
+  font-size: 20px;
+}
+
+span {
+  margin-left: 5px;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+
+input {
+  height: 30px;
+}
+
+.container {
+  margin: 20px auto;
+  width: 1000px;
+  
+  display: flex;
+  justify-content: center;
+}
+
+side {
+  margin-bottom: 20px;
+  padding: 20px;
+  background: rgb(240, 239, 239);
+  border: 1px solid rgb(184, 184, 183);
+
+  flex-grow: 1;
+}
+
+main {
+  padding: 0 10px;
+
+  flex-grow: 3;
+  /* Items */
+  display: flex;
+  flex-direction: column;
+}
+
+.search {
+  margin-top: 10px;
+
+  display: flex;
+  align-items: baseline;
+  justify-items: stretch;
+}
+
+#city-input {
+  padding: 0 10px;
+  font-size: 16px;
+  
+  flex: 3;
+}
+
+#add-city {
+  padding: 0 10px;
+  font-size: 16px;
+}
+
+.btn-container {
+  background: white;
+  border: 1px solid rgb(184, 184, 183);
+  border-radius: 6px;
+}
+
+.btn {
+  padding: 10px;
+  font-size: 20px;
+  border-bottom: 1px solid rgb(184, 184, 183);
+}
+
+.btn:hover {
+  font-size: 22px;
+}
+
+.btn-container  :last-child{
+  border-bottom: 0;
+}
+
+.current {
+  padding: 20px 20px 20px 20px;
+  background: rgb(240, 239, 239);
+  border: 1px solid rgb(184, 184, 183);
+  border-radius: 6px;
+
+  display: flex;
+  justify-content: stretch;
+}
+
+.weather {
+  flex-grow: 2;
+}
+
+.icon-date {
+  padding: 20px auto;
+  height: 225px;
+  width: 225px;
+  background: white;
+  border-radius: 50%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center ;
+  align-items: center;
+}
+
+.icon-date img {
+  width: 120px;
+}
+
+.forecast {
+  padding: 20px 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.forecast .title {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.days {
+  display: flex;
+  justify-content: space-between;
+}
+
+.days div {
+  padding: 20px;
+  background: rgb(200, 200, 200);
+  border: 1px;
+  border-color: rgb(63, 63, 63);
+  border-style: solid;
+  border-radius: 4px;
+}
+
+.days p {
+  margin: 5px 0;
+  padding: 0;
+  font-size: 16px;
+}
