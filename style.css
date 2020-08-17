@@ -1,4 +1,4 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: content-box;
@@ -10,14 +10,13 @@ body {
 
 header {
   padding: 20px 0;
-  min-width: 1000px;
+  min-width: 1100px;
   background: rgb(63, 63, 63);
   
   display: flex;
   justify-content: center;
 }
 h1 {
-  /* margin: 0 auto; */
   font-size: 48px;
   color: white;
 }
@@ -137,6 +136,30 @@ main {
   flex-grow: 2;
 }
 
+.current-uvi-0to2 {
+  color: white;
+  background: green;
+}
+
+.current-uvi-3to5 {
+  background: yellow;
+}
+
+.current-uvi-6to7 {
+  background: orange;
+  color: white;
+}
+
+.current-uvi-8to10 {
+  background: red;
+  color: white;
+}
+
+.current-uvi-11 {
+  background: violet;
+  color: white;
+}
+
 .icon-date {
   padding: 20px auto;
   height: 225px;
@@ -183,5 +206,10 @@ main {
 .days p {
   margin: 5px 0;
   padding: 0;
-  font-size: 16px;
+  font-size: 14px;
+}
+
+#current-uvi {
+  padding: 0 5px;
+  border-radius: 3px;
 }
