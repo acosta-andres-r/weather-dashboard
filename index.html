@@ -2,19 +2,97 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Document</title>
 </head>
 
 <body>
+  <header>
+    <h1>Weather Dashboard</h1>
+  </header>
+  <div class="container">
+    <side>
+      <form id="city-form">
+        <label for="city-input">Search for a City:</label>
+        <br>
+        <div class="search">
+          <input type="text" id="city-input">
 
+          <!-- Button triggers new city to be added -->
+          <input id="add-city" type="submit" value="S">
+        </div>
+      </form>
+      <div class="btn-container">
+        <div class="btn">Cities buttons</div>
+        <div class="btn">Cities buttons</div>
+        <div class="btn">Cities buttons</div>
+      </div>
+    </side>
+    <main>
+      <!-- CURRENT WEATHER -->
+      <div class="current">
+        <!-- Current Temp + additional data  -->
+        <div class="weather">
+          <h2 id="current-city">Houston</h2>
+          <hr>
+          <p>Temperature: <span>90.9</span> °F</p>
+          <p>Humidity: <span>41</span>%</p>
+          <p>Wind Speed: <span>4.7</span> MPH</p>
+          <p>UV Index: <span>9.49</span></p>
+        </div>
+        <!-- CURRENT icon + date -->
+        <div class="icon-date">
+          <img src="http://openweathermap.org/img/wn/10d@2x.png">
+          <h3 id="current-day">Fri</h3>
+          <h3 id="current-date">08/14</h3>
+        </div>
+      </div>
+      <!-- FORECAST -->
+      <div class="forecast">
+        <div class="title">
+          <h3>5-Day Forecast:</h3>
+        </div>
+        <div class="days">
+          <div>
+            <h3>Sat 08/16</h3>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" height="40px">
+            <p>Temp: <span>90.9</span> °F</p>
+            <p>Hum: <span>41</span>%</p>
+          </div>
+          <div>
+            <h3>Sun 08/16</h3>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" height="40px">
+            <p>Temp: <span>90.9</span> °F</p>
+            <p>Hum: <span>41</span>%</p>
+          </div>
+          <div>
+            <h3>Mon 08/16</h3>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" height="40px">
+            <p>Temp: <span>90.9</span> °F</p>
+            <p>Hum: <span>41</span>%</p>
+          </div>
+          <div>
+            <h3>Tue 08/16</h3>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" height="40px">
+            <p>Temp: <span>90.9</span> °F</p>
+            <p>Hum: <span>41</span>%</p>
+          </div>
+          <div>
+            <h3>Wed 08/16</h3>
+            <img src="http://openweathermap.org/img/wn/10d@2x.png" height="40px">
+            <p>Temp: <span>90.9</span> °F</p>
+            <p>Hum: <span>41</span>%</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script type="text/javascript" src="script.js"></script>
+  <!-- <script type="text/javascript" src="script.js"></script> -->
 
 </body>
 
