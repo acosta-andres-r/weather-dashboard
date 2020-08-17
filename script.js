@@ -31,6 +31,8 @@ $.ajax({
     var endPointOnecall = "onecall" + "?";
     var excludeQuery = "&exclude=hourly,minutely"
 
+    // var queryURLonecall = baseAPI + endPointOnecall + api + unitsAPI
+    //   + queryLat + queryLon + excludeQuery;
     var queryURLonecall = baseAPI + endPointOnecall + api + unitsAPI
       + queryLat + queryLon + excludeQuery;
 
