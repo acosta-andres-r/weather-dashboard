@@ -1,5 +1,5 @@
-var cities = [];  // LEAVE this by default
-
+var cities = [];
+var lastCitySearched = "" // Keep track of last city
 var errorEl = $("#display-error")
 
 // INITIALIZE: city buttons before assignnig click event when loading web page
@@ -9,11 +9,18 @@ initLocalStorage();
 function initLocalStorage() {
 
   var storedCities = JSON.parse(localStorage.getItem("cities"));
+  var storedLastCity = localStorage.getItem("last-city");
 
   if (storedCities !== null) {
+    // Initiate exisiting cities array
     cities = storedCities;
+
+    // Display last city at beginning
+    lastCitySearched = storedLastCity;
+    presentWeather(lastCitySearched)
   }
   renderCities();
+
 }
 
 function renderCities() {
@@ -34,6 +41,7 @@ function renderCities() {
   }
 
   storeCities();
+  storeLastCity(lastCitySearched);
 
   assignClickEventToDIVs()
 
@@ -42,6 +50,11 @@ function renderCities() {
 function storeCities() {
   // SET the values of Cities to local storage before initializing the rendering.
   localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+function storeLastCity(lastCity) {
+  // Keep track of last city searched
+localStorage.setItem("last-city", lastCity);
 }
 
 function presentWeather(city) {
@@ -174,11 +187,17 @@ function presentWeather(city) {
         }
 
       })
+      // IMPORTANT: assing city into the variable to store locally the last one
+      lastCitySearched = city;
+      storeLastCity(city)
+
       //IMPORTANT: Add city input if it does not already exist
       if (!cities.includes(city)) {
         cities.unshift(city);
         renderCities();
       }
+
+      
 
       // Searched city
       $("#current-city").text(city)
@@ -218,7 +237,7 @@ $("#add-city").on("click", function (event) {
 
   cityInputEl.val("");
 
-  if(isNaN(parseInt(cityInput))) {
+  if (isNaN(parseInt(cityInput))) {
     errorEl.removeClass("error")
     if (cityInput !== "") {
       presentWeather(cityInput);
