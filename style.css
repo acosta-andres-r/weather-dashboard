@@ -61,7 +61,6 @@ input {
   width: 1000px;
   
   display: flex;
-  justify-content: center;
 }
 
 side {
@@ -69,14 +68,12 @@ side {
   padding: 20px;
   background: rgb(240, 239, 239);
   border: 1px solid rgb(184, 184, 183);
-
-  flex-grow: 1;
 }
 
 main {
   padding: 0 10px;
 
-  flex-grow: 3;
+  flex-grow: 1;
   /* Items */
   display: flex;
   flex-direction: column;
@@ -194,7 +191,8 @@ main {
   justify-content: space-between;
 }
 
-.days div {
+
+.day {
   padding: 20px;
   background: rgb(200, 200, 200);
   border: 1px;
@@ -203,7 +201,7 @@ main {
   border-radius: 4px;
 }
 
-.days p {
+.day p {
   margin: 5px 0;
   padding: 0;
   font-size: 14px;

@@ -1,9 +1,47 @@
+var cities = [];  // LEAVE this by default
 
-$("#add-city").on("click", function (event) {
+// INITIALIZE: city buttons before assignnig click event when loading web page
+initLocalStorage();
 
-  event.preventDefault()
+// FUNCTIONS
+function initLocalStorage() {
 
-  var city = $("#city-input").val();
+  var storedCities = JSON.parse(localStorage.getItem("cities"));
+
+  if (storedCities !== null) {
+    cities = storedCities;
+  }
+  renderCities();
+}
+
+function renderCities() {
+
+  var cityBtns = $("#city-buttons")
+  $(cityBtns).empty()
+
+  // Render cities into buttons
+  for (city of cities) {
+    // Create a "button" div
+    var cityBtn = $("<div>");
+    // Modify the attributes of "button" div
+    cityBtn.text(city);
+    cityBtn.addClass("btn");
+    cityBtn.attr("data-city", city)
+    // Append "button" div
+    $(cityBtns).append(cityBtn);
+  }
+
+  storeCities();
+}
+
+function storeCities() {
+  // SET the values of Cities to local storage before initializing the rendering.
+  localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+function presentWeather(city) {
+
+  // var city = $("#city-input").val();
 
   // variable of API parts for easy access throughout the code
   var baseAPI = "https://api.openweathermap.org/data/2.5/"
@@ -29,7 +67,7 @@ $("#add-city").on("click", function (event) {
 
       var currentTempF = responseW.main.temp.toFixed(2) + " °F";
       var currentHumidity = responseW.main.humidity + " %";
-      var currentWind = responseW.wind.speed.toFixed(2) + " MPH";
+      var currentWind = responseW.wind.speed.toFixed(1) + " MPH";
       var currentUVI = ""; // Used inside "Date of Forecast"
 
       // Get coordinates to pass them for Onecall endpoint 
@@ -118,8 +156,8 @@ $("#add-city").on("click", function (event) {
             $("#date" + i).text(weekDay + ", " + monthNumber + "/" + day);
 
             // Assign forecast data to elements
-            $("#temp" + i).text(tempF);
-            $("#hum" + i).text(humidity);
+            $("#temp" + i).text(tempF + "°F");
+            $("#hum" + i).text(humidity + "%");
 
             // Icon
             // console.log("icon URL: " + forecastIconURL);
@@ -149,5 +187,27 @@ $("#add-city").on("click", function (event) {
       // $("body").append($("<img>").attr("src", iconURL));
       $("#current-icon").attr("src", iconURL);
     })
+}
 
-})
+// EVENTS
+$("#add-city").on("click", function (event) {
+
+  event.preventDefault()
+
+  var cityInput = $("#city-input").val();
+  presentWeather(cityInput);
+
+  // Add city input if it does not already exist
+  if(!cities.includes(cityInput)) {
+    cities.unshift(cityInput);
+    renderCities();
+  }
+
+});
+
+$(".btn").on("click", function (event) {
+
+  var cityClicked = $(this).attr("data-city");
+  presentWeather(cityClicked);
+
+});
