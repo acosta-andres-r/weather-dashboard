@@ -1,5 +1,7 @@
 var cities = [];  // LEAVE this by default
 
+var errorEl = $("#display-error")
+
 // INITIALIZE: city buttons before assignnig click event when loading web page
 initLocalStorage();
 
@@ -32,6 +34,9 @@ function renderCities() {
   }
 
   storeCities();
+
+  assignClickEventToDIVs()
+
 }
 
 function storeCities() {
@@ -40,8 +45,6 @@ function storeCities() {
 }
 
 function presentWeather(city) {
-
-  // var city = $("#city-input").val();
 
   // variable of API parts for easy access throughout the code
   var baseAPI = "https://api.openweathermap.org/data/2.5/"
@@ -58,11 +61,14 @@ function presentWeather(city) {
   $.ajax({
     url: queryURLweather,
     method: "GET",
-    error: function (xhr, status, error) { // Testing error
-      alert(xhr.responseJSON.message);
-    }
   })
-    .then(function (responseW) {
+    .fail(function (xhr, status, error) { // Testing error
+      // alert(xhr.responseJSON.message);
+      errorEl.text(xhr.responseJSON.message)
+      errorEl.addClass("error")
+
+    })
+    .done(function (responseW) {
       // console.log(responseW);
 
       var currentTempF = responseW.main.temp.toFixed(2) + " °F";
@@ -168,14 +174,16 @@ function presentWeather(city) {
         }
 
       })
+      //IMPORTANT: Add city input if it does not already exist
+      if (!cities.includes(city)) {
+        cities.unshift(city);
+        renderCities();
+      }
 
       // Searched city
       $("#current-city").text(city)
 
       // CURRENT Weather
-      // console.log("TESTING: Current Temperature (F): " + currentTempF);
-      // console.log("TESTING: Current Humidity: " + currentHumidity);
-      // console.log("TESTING: Current Wind Speed: " + currentWind);
       $("#current-temp").text(currentTempF)
       $("#current-hum").text(currentHumidity)
       $("#current-wind").text(currentWind)
@@ -183,10 +191,21 @@ function presentWeather(city) {
       // Get icon code for URL to attach it into image tag
       var iconCode = responseW.weather[0].icon + "@2x.png";
       var iconURL = iconBaseURL + iconCode;
-      // console.log("TESTING: icon URL: " + iconURL);
-      // $("body").append($("<img>").attr("src", iconURL));
       $("#current-icon").attr("src", iconURL);
+
+      // Animate if there is no errors
+      $(".day").addClass("out-day")
     })
+
+}
+
+function assignClickEventToDIVs() {
+  $(".btn").on("click", function (event) {
+    console.log("Clicked")
+    var cityClicked = $(this).attr("data-city");
+    $("#city-input").val("");
+    presentWeather(cityClicked);
+  });
 }
 
 // EVENTS
@@ -194,20 +213,21 @@ $("#add-city").on("click", function (event) {
 
   event.preventDefault()
 
-  var cityInput = $("#city-input").val();
-  presentWeather(cityInput);
+  var cityInputEl = $("#city-input");
+  var cityInput = cityInputEl.val().trim();
 
-  // Add city input if it does not already exist
-  if(!cities.includes(cityInput)) {
-    cities.unshift(cityInput);
-    renderCities();
+  cityInputEl.val("");
+
+  if(isNaN(parseInt(cityInput))) {
+    errorEl.removeClass("error")
+    if (cityInput !== "") {
+      presentWeather(cityInput);
+    }
+  } else {
+    // alert("Input a valid string.")
+    errorEl.text("Invalid string")
+    errorEl.addClass("error")
   }
 
 });
 
-$(".btn").on("click", function (event) {
-
-  var cityClicked = $(this).attr("data-city");
-  presentWeather(cityClicked);
-
-});
